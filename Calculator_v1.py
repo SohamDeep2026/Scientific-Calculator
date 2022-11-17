@@ -16,6 +16,7 @@ from math import (
 )
 
 
+# Function to add functionality to the buttons
 def click(value, test_check_list):
     try:
         text = str(entry_field.get())
@@ -114,6 +115,7 @@ def click(value, test_check_list):
             entry_field.insert(END, output)
         else:
             entry_field.insert(INSERT, value)
+    # Code to handle errors
     except ValueError:
         entry_field.delete(0, END)
         entry_field.insert(INSERT, "Invalid input")
@@ -128,6 +130,7 @@ def click(value, test_check_list):
         entry_field.insert(INSERT, "Invalid input")
 
 
+# Creating the new window
 root = Tk()
 root.title("Calculator")
 root.config(bg="#222222")
@@ -171,6 +174,7 @@ test_check_list = [
     ".",
 ]
 
+# Code to add buttons
 button = Button(
     root,
     width=5,
