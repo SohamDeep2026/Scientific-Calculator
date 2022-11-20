@@ -117,18 +117,20 @@ def click(value, test_check_list):
         else:
             entry_field.insert(INSERT, value)
     # Code to handle errors
-    except ValueError:
+    except (
+        TypeError,
+        ValueError,
+        SyntaxError,
+        NameError,
+        ArithmeticError,
+        ImportError,
+        MemoryError,
+        OverflowError,
+        SystemError,
+        UnicodeError
+        ):
         entry_field.delete(0, END)
-        entry_field.insert(INSERT, "Invalid input")
-    except SyntaxError:
-        entry_field.delete(0, END)
-        entry_field.insert(INSERT, "Invalid input")
-    except NameError:
-        entry_field.delete(0, END)
-        entry_field.insert(INSERT, "Invalid input")
-    except TypeError:
-        entry_field.delete(0, END)
-        entry_field.insert(INSERT, "Invalid input")
+        entry_field.insert(END, "Invalid input")
 
 
 # Creating the new window for the Calculator
