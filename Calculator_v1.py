@@ -21,6 +21,7 @@ def click(value, test_check_list):
     try:
         text = str(entry_field.get())
 
+        # Code that determines what occurs when a button is clicked.
         if value == "C":
             text = text[: len(text) - 1]
             entry_field.delete(0, END)
@@ -130,17 +131,20 @@ def click(value, test_check_list):
         entry_field.insert(INSERT, "Invalid input")
 
 
-# Creating the new window
+# Creating the new window for the Calculator
 root = Tk()
 root.title("Calculator")
 root.config(bg="#222222")
 root.geometry("452x350+150+125")
 
+# Code for the entry box
 entry_field = Entry(
     root, font=("calibri", 20, "bold"), bg="#E6E6E6", fg="#040404", bd=14, relief=SUNKEN
 )
 entry_field.grid(row=0, column=0, columnspan=5)
 
+# List of all the functions that can be performed.
+# It is used to check the validity of input.
 test_check_list = [
     "π",
     "e",
@@ -172,9 +176,13 @@ test_check_list = [
     "ln",
     "0",
     ".",
+    "deg",
+    "rad",
 ]
 
 # Code to add buttons
+
+# deg
 button = Button(
     root,
     width=5,
@@ -190,6 +198,8 @@ button = Button(
     command=lambda button="deg": click(button, test_check_list),
 )
 button.grid(row=0, column=5)
+
+# rad
 button = Button(
     root,
     width=5,
@@ -205,6 +215,8 @@ button = Button(
     command=lambda button="rad": click(button, test_check_list),
 )
 button.grid(row=0, column=6)
+
+# List of buttons and operations that can be performed
 button_list = [
     "C",
     "CE",
@@ -246,6 +258,7 @@ row_val = 1
 col_val = 0
 for i in button_list:
     if col_val < 2 and row_val == 1:
+        # C, CE
         button = Button(
             root,
             width=5,
@@ -265,6 +278,7 @@ for i in button_list:
         (col_val == 3 or col_val == 4 or col_val == 5)
         and (row_val == 2 or row_val == 3 or row_val == 4)
     ) or (col_val == 4 and row_val == 5):
+        # 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
         button = Button(
             root,
             width=5,
@@ -281,6 +295,7 @@ for i in button_list:
         )
         button.grid(row=row_val, column=col_val)
     elif col_val == 6 and row_val == 5:
+        # =
         button = Button(
             root,
             width=5,
@@ -297,6 +312,7 @@ for i in button_list:
         )
         button.grid(row=row_val, column=col_val)
     elif col_val == 6 and row_val > 0:
+        # +, -, x, /
         button = Button(
             root,
             width=5,
@@ -313,6 +329,10 @@ for i in button_list:
         )
         button.grid(row=row_val, column=col_val)
     else:
+        # deg, rad, pi, e, (, )
+        # sin, cos, tan, asin, acos, atan
+        # x^y, x^y,root(x)
+        # x!, %, log10, ln, %, .
         button = Button(
             root,
             width=5,
@@ -333,4 +353,5 @@ for i in button_list:
         col_val = 0
         row_val += 1
 
+# Executes a loop to keep the window continuously open
 root.mainloop()
