@@ -17,7 +17,7 @@ from math import (
 
 
 # Function to add functionality to the buttons
-def click(value, test_check_list):
+def click(value, test_check_tuple):
     try:
         text = str(entry_field.get())
 
@@ -37,30 +37,35 @@ def click(value, test_check_list):
         elif value == ")":
             entry_field.insert(INSERT, ")")
         elif value == "sin":
-            entry_field.insert(INSERT, "sin()")
+            entry_field.insert(INSERT, "sin(")
         elif value == "cos":
-            entry_field.insert(INSERT, "cos()")
+            entry_field.insert(INSERT, "cos(")
         elif value == "tan":
-            entry_field.insert(INSERT, "tan()")
+            entry_field.insert(INSERT, "tan(")
         elif value == "asin":
-            entry_field.insert(INSERT, "asin()")
+            entry_field.insert(INSERT, "asin(")
         elif value == "acos":
-            entry_field.insert(INSERT, "acos()")
+            entry_field.insert(INSERT, "acos(")
         elif value == "atan":
-            entry_field.insert(INSERT, "atan()")
+            entry_field.insert(INSERT, "atan(")
         elif value == "x^2":
             entry_field.insert(INSERT, "^2")
         elif value == "x^y":
             entry_field.insert(INSERT, "^")
         elif value == "log10":
-            entry_field.insert(INSERT, "log10()")
+            entry_field.insert(INSERT, "log10(")
         elif value == "ln":
-            entry_field.insert(INSERT, "ln")
+            entry_field.insert(INSERT, "ln(")
         elif value == "√x":
-            entry_field.insert(INSERT, "√()")
+            entry_field.insert(INSERT, "√(")
         elif value == "x!":
             entry_field.insert(INSERT, "!")
         elif value == "%":
+            test_check = text
+            for j in test_check_tuple:
+                test_check = test_check.replace(j, "")
+            if test_check != "":
+                a = int("a")
             entry_field.delete(0, END)
             a = (
                 eval(
@@ -89,12 +94,12 @@ def click(value, test_check_list):
         elif value == "/":
             entry_field.insert(INSERT, "/")
         elif value == "deg":
-            entry_field.insert(INSERT, "deg()")
+            entry_field.insert(INSERT, "deg(")
         elif value == "rad":
-            entry_field.insert(INSERT, "rad()")
+            entry_field.insert(INSERT, "rad(")
         elif value == "=":
             test_check = text
-            for j in test_check_list:
+            for j in test_check_tuple:
                 test_check = test_check.replace(j, "")
             if test_check != "":
                 a = int("a")
@@ -117,18 +122,7 @@ def click(value, test_check_list):
         else:
             entry_field.insert(INSERT, value)
     # Code to handle errors
-    except (
-        TypeError,
-        ValueError,
-        SyntaxError,
-        NameError,
-        ArithmeticError,
-        ImportError,
-        MemoryError,
-        OverflowError,
-        SystemError,
-        UnicodeError
-        ):
+    except:
         entry_field.delete(0, END)
         entry_field.insert(END, "Invalid input")
 
@@ -147,7 +141,7 @@ entry_field.grid(row=0, column=0, columnspan=5)
 
 # List of all the functions that can be performed.
 # It is used to check the validity of input.
-test_check_list = [
+test_check_tuple = (
     "π",
     "e",
     "(",
@@ -180,7 +174,7 @@ test_check_list = [
     ".",
     "deg",
     "rad",
-]
+)
 
 # Code to add buttons
 
@@ -197,7 +191,7 @@ button = Button(
     font=("arial", 13, "bold"),
     activebackground="#adadad",
     activeforeground="#FFFFFF",
-    command=lambda button="deg": click(button, test_check_list),
+    command=lambda button="deg": click(button, test_check_tuple),
 )
 button.grid(row=0, column=5)
 
@@ -214,12 +208,12 @@ button = Button(
     font=("arial", 13, "bold"),
     activebackground="#adadad",
     activeforeground="#FFFFFF",
-    command=lambda button="rad": click(button, test_check_list),
+    command=lambda button="rad": click(button, test_check_tuple),
 )
 button.grid(row=0, column=6)
 
 # List of buttons and operations that can be performed
-button_list = [
+button_tuple = (
     "C",
     "CE",
     "π",
@@ -255,10 +249,10 @@ button_list = [
     "0",
     ".",
     "=",
-]
+)
 row_val = 1
 col_val = 0
-for i in button_list:
+for i in button_tuple:
     if col_val < 2 and row_val == 1:
         # C, CE
         button = Button(
@@ -273,7 +267,7 @@ for i in button_list:
             font=("arial", 13, "bold"),
             activebackground="#F2A36E",
             activeforeground="#FFFFFF",
-            command=lambda button=i: click(button, test_check_list),
+            command=lambda button=i: click(button, test_check_tuple),
         )
         button.grid(row=row_val, column=col_val)
     elif (
@@ -293,7 +287,7 @@ for i in button_list:
             font=("arial", 13, "bold"),
             activebackground="#adadad",
             activeforeground="#FFFFFF",
-            command=lambda button=i: click(button, test_check_list),
+            command=lambda button=i: click(button, test_check_tuple),
         )
         button.grid(row=row_val, column=col_val)
     elif col_val == 6 and row_val == 5:
@@ -310,7 +304,7 @@ for i in button_list:
             font=("arial", 13, "bold"),
             activebackground="#FFDA65",
             activeforeground="#FFFFFF",
-            command=lambda button=i: click(button, test_check_list),
+            command=lambda button=i: click(button, test_check_tuple),
         )
         button.grid(row=row_val, column=col_val)
     elif col_val == 6 and row_val > 0:
@@ -327,13 +321,13 @@ for i in button_list:
             font=("arial", 13, "bold"),
             activebackground="#96B0DE",
             activeforeground="#FFFFFF",
-            command=lambda button=i: click(button, test_check_list),
+            command=lambda button=i: click(button, test_check_tuple),
         )
         button.grid(row=row_val, column=col_val)
     else:
         # deg, rad, pi, e, (, )
         # sin, cos, tan, asin, acos, atan
-        # x^y, x^y,root(x)
+        # x^y, x^y,√(x)
         # x!, %, log10, ln, %, .
         button = Button(
             root,
@@ -347,7 +341,7 @@ for i in button_list:
             font=("arial", 13, "bold"),
             activebackground="#adadad",
             activeforeground="#FFFFFF",
-            command=lambda button=i: click(button, test_check_list),
+            command=lambda button=i: click(button, test_check_tuple),
         )
         button.grid(row=row_val, column=col_val)
     col_val += 1
