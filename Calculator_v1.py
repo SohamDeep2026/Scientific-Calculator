@@ -13,6 +13,7 @@ from math import (
     e,
     log,
     log10,
+    factorial,
 )
 
 
@@ -58,8 +59,8 @@ def click(value, test_check_tuple):
             entry_field.insert(INSERT, "ln(")
         elif value == "√x":
             entry_field.insert(INSERT, "√(")
-        elif value == "x!":
-            entry_field.insert(INSERT, "!")
+        elif value == "fact":
+            entry_field.insert(INSERT, "fact(")
         elif value == "%":
             test_check = text
             for j in test_check_tuple:
@@ -77,6 +78,7 @@ def click(value, test_check_tuple):
                     .replace("ln10", "log10")
                     .replace("x", "*")
                     .replace("π", "pi")
+                    .replace("fact", "factorial")
                 )
                 * 100
             )
@@ -113,6 +115,7 @@ def click(value, test_check_tuple):
                 .replace("ln10", "log10")
                 .replace("x", "*")
                 .replace("π", "pi")
+                .replace("fact", "factorial")
             )
             if a < 0.001:
                 output = str(round(a, 10))
@@ -147,6 +150,9 @@ test_check_tuple = (
     "(",
     ")",
     "+",
+    "asin",
+    "acos",
+    "atan",
     "sin",
     "cos",
     "tan",
@@ -154,9 +160,6 @@ test_check_tuple = (
     "8",
     "9",
     "-",
-    "asin",
-    "acos",
-    "atan",
     "4",
     "5",
     "6",
@@ -168,7 +171,7 @@ test_check_tuple = (
     "3",
     "/",
     "√",
-    "!",
+    "fact",
     "ln",
     "0",
     ".",
@@ -243,7 +246,7 @@ button_tuple = (
     "3",
     "/",
     "√x",
-    "x!",
+    "fact",
     "ln",
     "%",
     "0",
@@ -348,6 +351,5 @@ for i in button_tuple:
     if col_val == 7:
         col_val = 0
         row_val += 1
-
 # Executes a loop to keep the window continuously open
 root.mainloop()
