@@ -145,6 +145,8 @@ entry_field.grid(row=0, column=0, columnspan=5)
 # List of all the functions that can be performed.
 # It is used to check the validity of input.
 test_check_tuple = (
+    "deg",
+    "rad",
     "π",
     "e",
     "(",
@@ -175,8 +177,6 @@ test_check_tuple = (
     "ln",
     "0",
     ".",
-    "deg",
-    "rad",
 )
 
 # Code to add buttons
